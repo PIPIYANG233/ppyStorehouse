@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="外部/commons-beanutils-1.7.0.jar"/>
+	<classpathentry kind="lib" path="外部/commons-collections-3.2.jar"/>
+	<classpathentry kind="lib" path="外部/commons-email-1.4.jar"/>
+	<classpathentry kind="lib" path="外部/commons-lang-2.3.jar"/>
+	<classpathentry kind="lib" path="外部/commons-logging.jar"/>
+	<classpathentry kind="lib" path="外部/dsn.jar"/>
+	<classpathentry kind="lib" path="外部/ezmorph-1.0.3.jar"/>
+	<classpathentry kind="lib" path="外部/gimap.jar"/>
+	<classpathentry kind="lib" path="外部/imap.jar"/>
+	<classpathentry kind="lib" path="外部/mail.jar"/>
+	<classpathentry kind="lib" path="外部/mailapi.jar"/>
+	<classpathentry kind="lib" path="外部/mysql-connector-java-8.0.19.jar"/>
+	<classpathentry kind="lib" path="外部/pop3.jar"/>
+	<classpathentry kind="lib" path="外部/smtp.jar"/>
+	<classpathentry kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
+	<classpathentry kind="lib" path="外部/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="外部/hamcrest-core-1.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

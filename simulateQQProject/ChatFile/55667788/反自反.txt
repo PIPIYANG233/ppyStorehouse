@@ -1,0 +1,54 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+int n,m;//n代表集合中元素的个数,m表示集合r中序偶的个数
+int e[101][101];//关系矩阵
+int a[101];//集合a
+int vis[101][101],book[101][101];
+struct node
+{
+    int x, y;//x为第一元素，y为第二元素
+} r[100010]; //集合r的序偶
+int refl()
+{
+    bool flag=false;
+    for(int i=1; i<=n; i++)
+    {
+        if(!e[i][i])//判断是否为自反，要是有一个不是就是反自反
+        {
+            flag=true;
+            break;
+        }
+    }
+    if(flag)
+        return 0;
+    else
+        return 1;
+}
+int main()
+{
+    while (~scanf("%d%d",&n,&m))
+    {
+        memset(vis,0,sizeof(vis));
+        memset(e,0,sizeof(e));
+        for (int i = 1; i <= n; i++)
+        {
+            scanf("%d",&a[i]);//输入集合a
+        }
+        for(int i=1; i<=m; i++)
+        {
+            scanf("%d%d",&r[i].x,&r[i].y);//输入集合r的第一第二元素
+            e[r[i].x][r[i].y]=1;
+        }
+        //生成关系矩阵
+        if(refl())
+        {
+            printf("具有自反性\n");
+
+        }
+        else
+        {
+            printf("不具有自反性\n");
+        }
+    }
+}

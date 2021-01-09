@@ -1,0 +1,37 @@
+#include<stdio.h>
+int n;
+int duicheng(int G[][1000])
+{
+    int flag=1;//如果是对称的就标记为1
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=n;j++)
+        {
+            if(G[i][j]==1&&G[j][i]!=1)//不满足对称条件，标记为0
+            {
+                flag=0;
+            }
+        }
+        if(flag==0)//不满足条件直接退出循环
+            break;
+    }
+    if(flag)return 1;//对称就返回1，否则返回0
+    else return 0;
+}
+int main()
+{
+    int x,y;
+    int m[100][1000];
+    scanf("%d",&n);
+   for(int i=0;i<n;i++)
+    {
+       scanf("%d%d",&x,&y);//输入一对就在矩阵中标记为1
+       m[x][y]=1;
+    }
+    if(duicheng(m))
+        printf("是对称的");
+    else
+        printf("不是对称的");
+
+
+}
