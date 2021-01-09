@@ -1,0 +1,61 @@
+<h5 id="h5--"><a name="看过很多关于快速幂的文章，个人觉得其核心是进制知识。" class="reference-link"></a><span class="header-link octicon octicon-link"></span>看过很多关于快速幂的文章，个人觉得其核心是进制知识。</h5><h4 id="h4--"><a name="一般的求幂方法:" class="reference-link"></a><span class="header-link octicon octicon-link"></span>一般的求幂方法:</h4><p><strong>如 q 的 n次方</strong></p>
+<pre><code class="lang-c">int normal_pow(int q, int n)
+{
+    int ans = 1 , i;
+    for(i=1 ; i&lt;=n ; i++)
+    {
+        ans *= q;
+    }
+    return ans;
+}
+</code></pre>
+<p>或者</p>
+<pre><code class="lang-c">int normal_pow(int q, int n)
+{
+    int ans = 1;
+    while(n--)
+    {
+        ans *= q;
+    }
+    return ans;
+}
+</code></pre>
+<p><strong>时间复杂度为 O(n)</strong></p>
+<h4 id="h4--n-11-"><a name="下面令 n=11 来介绍快速幂:" class="reference-link"></a><span class="header-link octicon octicon-link"></span>下面令 n=11 来介绍快速幂:</h4><p><img src="https://img-blog.csdnimg.cn/20200115211142814.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>代码实现:</strong></p>
+<pre><code class="lang-c">int quick_pow(int q, int n)
+{
+    int ans = 1,a = q;
+    while(n)
+    {
+        if(n&amp;1)
+        {
+            ans = ans * a;
+        }
+        // 通过 &#39;&amp;&#39; 判断 从左往右是 1或0 以此判断要不要加入总和
+        a = a * a;  //二进制从右往左第 n 位的值 = 第n-1 位的值自乘
+
+        n &gt;&gt;= 1;  //通过 &#39;&gt;&gt;&#39; 实现 从右往左
+    }
+    return ans;
+}
+</code></pre>
+<p><strong>模拟实现一遍</strong><br><img src="https://img-blog.csdnimg.cn/20200115213329397.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>时间复杂度为 O(log n) 效率大大提高</strong></p>
+<h4 id="h4--"><a name="理解快速幂后，快速幂取模可以很容易理解" class="reference-link"></a><span class="header-link octicon octicon-link"></span>理解快速幂后，快速幂取模可以很容易理解</h4><p>一个数 q 对 mod 取余<br>1.等于 q 的因子 对mod取余<br>2.然后相乘<br>3.之后再在对 mod 取余</p>
+<p><img src="https://img-blog.csdnimg.cn/20200115213723769.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>代码如下</strong></p>
+<pre><code class="lang-c">int quick_pow_mod(int q, int n, int mod)//mod 表示需要取模的数
+{
+    int ans = 1,a = q % mod;
+    while(n)
+    {
+        if(n&amp;1)
+        {
+            ans = ans * a % mod;  //不要忘记总和也需要取余
+        }
+        // 通过 &#39;&amp;&#39; 判断 从左往右是 1或0
+        a = a * a % mod; //二进制从右往左第 n 位的值 = 第n-1 位的值自乘
+
+        n &gt;&gt;= 1; //通过 &#39;&gt;&gt;&#39; 实现 从右往左
+    }
+    return ans;
+}
+</code></pre>

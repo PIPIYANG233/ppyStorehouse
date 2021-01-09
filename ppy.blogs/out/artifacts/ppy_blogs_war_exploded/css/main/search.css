@@ -1,0 +1,287 @@
+body{
+    background-size: 117%;
+    background-attachment:fixed;
+}
+
+#search_input{
+    background: #f0f0f5;
+    width: 100%;
+}
+
+#search{
+    background-color: #f0f0f5;
+}
+
+#right_head_img{
+    margin-top: 2px;
+    margin-right: 5px;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+}
+
+.search_content{
+    border-radius: 5px;
+    width: 65%;
+    height: 90%;
+    float: left;
+    margin-left: 17%;
+    background: white;
+}
+
+.search_content_blog_sort{
+    height: 5%;
+    width: 80%;
+    margin: auto;
+    /*background: whitesmoke;*/
+}
+
+.sorts{
+    border: 1px solid whitesmoke;
+    font-size: medium;
+    float: left;
+    margin-left: 5%;
+    margin-top: 1%;
+    text-align: center;
+    width: 15%;
+    height: 65%;
+    cursor: pointer;
+    color: lightgray;
+    /*background: blue;*/
+}
+
+.changeBackground{
+    background: #FFEFEF;
+    color: red;
+}
+
+.search_blogs{
+    display: none;
+    height: 86%;
+    width: 100%;
+    margin: auto;
+    /*background: deeppink;*/
+}
+
+.searchBlog{
+    width: 90%;
+    height: 10.5%;
+    margin: auto;
+    margin-top: 1%;
+    background: whitesmoke;
+}
+
+.searchBlog_title{
+    width: 100%;
+    height: 40%;
+    float: left;
+    margin-left: 0px;
+    /*margin-top: 20px;*/
+    font-size: large;
+    cursor: pointer;
+    /*background: pink;*/
+}
+
+.searchBlog_data{
+    width: 100%;
+    height: 35%;
+    float: left;
+    margin-top: 10px;
+    /*background: purple;*/
+}
+
+.searchBlog_type{
+    width: 11%;
+    height: 100%;
+    float: left;
+    color: lightgray;
+    /*background: #00d95a;*/
+}
+
+.searchBlog_accept_original{
+    -webkit-text-fill-color:#EFADA8
+}
+
+.searchBlog_accept_reprint{
+    -webkit-text-fill-color: lightgreen;
+}
+
+.searchBlog_time{
+    width: 15%;
+    height: 100%;
+    float: left;
+    color: lightgray;
+    /*background: #00ff00;*/
+}
+
+.searchBlog_scan{
+    width: 10%;
+    height: 100%;
+    float: left;
+    color: lightgray;
+    /*background: #5A5CAD;*/
+}
+
+#scan_img{
+    width: 25px;
+    height: 25px;
+}
+
+.searchBlog_up{
+    width: 10%;
+    height: 100%;
+    float: left;
+    color: lightgray;
+    /*background: #5A5CAD;*/
+}
+
+#up_img{
+    width: 20px;
+    height: 25px;
+}
+
+.searchBlog_collect{
+    width: 10%;
+    height: 100%;
+    float: left;
+    color: lightgray;
+    /*background: #5A5CAD;*/
+}
+
+#collect_img{
+    width: 20px;
+    height: 25px;
+}
+
+.searchBlog_labels{
+    width: 40%;
+    height: 100%;
+    float: left;
+    color: lightgray;
+    /*background: #FFAA3E;*/
+}
+
+.labels{
+    float: left;
+    margin-left: 20px;
+    color: #66afe9;
+    font-size: small;
+    background: white;
+    border-radius: 5px;
+    height: 100%;
+}
+
+.searchUsers{
+    display: none;
+    height: 86%;
+    width: 100%;
+    margin: auto;
+    /*background: deeppink;*/
+}
+
+.searchUser{
+    width: 90%;
+    height: 10.5%;
+    margin: auto;
+    margin-top: 1%;
+    background: whitesmoke;
+}
+
+.searchUser_head{
+    width: 10%;
+    height: 100%;
+    /*background: #FFAA3E;*/
+    float: left;
+    margin-left: 0px;
+}
+
+#searchUser_head_img{
+    cursor: pointer;
+    width: 65px;
+    height: 65px;
+    float: left;
+    margin-left: 3px;
+    margin-top: 3px;
+}
+
+.searchUser_data{
+    float: left;
+    width: 85%;
+    height: 100%;
+    margin-left: 0px;
+    /*background: pink;*/
+}
+
+.searchUser_name_div{
+    float: left;
+    margin-left: 0px;
+    font-size: x-large;
+    text-align: revert;
+    color: lightgray;
+    width: 50%;
+    height: 100%;
+    /*background: #1b6d85;*/
+}
+
+.searchUser_name{
+    float: left;
+    margin-left: 0px;
+    margin-top: 4%;
+    height: 50%;
+    width: 100%;
+    /*background: blue;*/
+}
+
+.searchUser_follow{
+    float: right;
+    margin-right: 0px;
+    width: 50%;
+    height: 100%;
+    /*background: #FFAA3E;*/
+}
+
+#searchUser_follow_button{
+    float: right;
+    margin-top: 4%;
+}
+
+.page{
+    height: 10%;
+    width: 80%;
+    margin: auto;
+    /*background: deeppink;*/
+}
+
+.recommendLabels{
+    display: none;
+    border-radius: 5px;
+    width: 7%;
+    height: 40%;
+    background: white;
+    float: left;
+    margin-left: 5%;
+}
+
+.recommendLabel_title{
+    width: 100%;
+    height: 5%;
+    margin: auto;
+    text-align: center;
+    /*background: deeppink;*/
+    font-family: '华文宋体';
+    -webkit-text-fill-color: lightgray;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+}
+
+.recommendLabel{
+    width: 100%;
+    height: 5%;
+    margin: auto;
+    margin-top: 15px;
+    text-align: center;
+    /*background: deeppink;*/
+    font-family: '华文宋体';
+    font-size: 15px;
+    letter-spacing: 0.04em;
+}

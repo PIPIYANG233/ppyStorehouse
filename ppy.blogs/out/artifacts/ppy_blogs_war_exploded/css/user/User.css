@@ -1,0 +1,125 @@
+body{
+    background-size: 100%;
+    background-attachment:fixed;
+}
+
+#search_input{
+    background: #f0f0f5;
+    width: 100%;
+}
+
+#search{
+    background-color: #f0f0f5;
+}
+
+#right_head_img{
+    margin-top: 2px;
+    margin-right: 5px;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+}
+
+#show_btn{
+    float: left;
+    margin-top: 200px;
+}
+
+.left{
+    /*display: none;*/
+    width: 10%;
+    height: 45%;
+    border: 3px solid gainsboro;
+    background: white;
+    float: left;
+    margin-left: 10px;
+    margin-top: 10%;
+}
+
+.name{
+    margin-top: 5px;
+    margin-left: 0px;
+    width: 100%;
+}
+
+#name_span{
+    font-size: large;
+    text-align: center;
+}
+
+.list-group{
+    margin-top: 20px;
+    width: 100%;
+}
+
+#user_inf{
+    text-align: center;
+    border: white;
+    width: 90%;
+    margin: auto;
+}
+
+#user_blogs{
+    text-align: center;
+    border: white;
+    width: 90%;
+    margin: auto;
+}
+
+#user_att{
+    text-align: center;
+    border: white;
+    width: 90%;
+    margin: auto;
+}
+
+#user_fans{
+    text-align: center;
+    border: white;
+    width: 90%;
+    margin: auto;
+}
+
+#user_collect{
+    text-align: center;
+    border: white;
+    width: 90%;
+    margin: auto;
+}
+
+#user_columns{
+    text-align: center;
+    border: white;
+    width: 90%;
+    margin: auto;
+}
+
+.home_div{
+    width: 100%;
+}
+
+.create_div{
+    width: 100%;
+}
+
+.login_div{
+    width: 100%;
+}
+
+.main {
+    width: 75%;
+    height: 89%;
+    opacity: 1;
+    margin-top: 0px;
+    margin-left: 25%;
+}
+
+.main_center {
+    display: none;
+    border-radius: 30px;
+    margin-top: 6%;
+    width: 70%;
+    height: 80%;
+    background: white;
+    float: left;
+}

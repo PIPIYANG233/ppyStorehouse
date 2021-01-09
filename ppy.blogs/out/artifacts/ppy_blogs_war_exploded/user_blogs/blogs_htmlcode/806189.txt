@@ -1,0 +1,56 @@
+<p>详细博客地址<a href="https://blog.csdn.net/pengwill97/article/details/80879387#%E5%AD%97%E7%AC%A6%E4%B8%B2hash%E5%85%A5%E9%97%A8">https://blog.csdn.net/pengwill97/article/details/80879387#%E5%AD%97%E7%AC%A6%E4%B8%B2hash%E5%85%A5%E9%97%A8</a></p>
+<p>字符串Hash简单来说就是 <strong>把一个字串转换成整数</strong></p>
+<p><strong><em>我们可以通过这个整数判断字符串是否相等。<br>当然不是简单的将每个字符的ASCLL值相加；因为不同的组合所以字符ASCLL值相加可能相等，使得判断错误。</em></strong></p>
+<h1 id="h1-hash-"><a name="Hash公式" class="reference-link"></a><span class="header-link octicon octicon-link"></span>Hash公式</h1><p>例如字符串 <strong>str</strong> 由 <strong>a~z</strong> 字符组成。<br>则公式如下：</p>
+<h4 id="h4-hash-i-hash-i-1-p-s-i-a-1"><a name="hash[ i ] = hash[ i - 1 ] * p + s[ i ] - ‘ a ‘ + 1" class="reference-link"></a><span class="header-link octicon octicon-link"></span>hash[ i ] = hash[ i - 1 ] * p + s[ i ] - ‘ a ‘ + 1</h4><p>**1. p 为质数，取 131 或者 13331 最佳</p>
+<ol>
+<li>s[ i ] - ’ a ’ + 1 相当于 a对应1；b对应2；c对应3 ……</li><li>此处运用了 unsigned long long 的范围自缢出（即自动对 2^64 ?1 取模）使得转换成的整数相等的几率很低**</li></ol>
+<h2 id="h2-u4F8Bu5B50"><a name="例子" class="reference-link"></a><span class="header-link octicon octicon-link"></span>例子</h2><p><strong>str = “abcdef”,并且 p 取 131;<br>h[ 0 ] = 0 // 默认为0<br>h[ 1 ] = h[ 0 ] <em> p + a - a +1 = 1<br>h[ 2 ] = h[ 1 ] </em> p + b- a +1 = 1 <em> 131^1 + 2<br>h[ 3 ] = …… = 1 </em> 131^2 + 2 <em> 131 + 3<br>h[ 4 ] = …… = 1 </em> 131^3 + 2 <em> 131^2 + 3 </em> 131 + 4<br>h[ 5 ] = …… = 1 <em> 131^4 + 2 </em> 131^3 + 3 <em> 131^2 + 4 </em> 131 + 5<br>h[ 6 ] = …… = 1 <em> 131^5 + 2 </em> 131^4 + 3 <em> 131^3 + 4 </em> 131^2 + 5 * 131 + 6</strong></p>
+<p>这样是不是有点 <strong>其他进制转换成10进制</strong> 的感觉了？</p>
+<p><strong>其实真的可以理解成 p 进制的数 转换成 十进制的数<br>则 abcdef = 123456 (此处为131进制)</strong></p>
+<p>注意输入时可以这样：</p>
+<pre><code class="lang-cpp">scanf(&quot;%s&quot;,str+1);
+</code></pre>
+<p><strong><em>方便 hash[ i ] 存储！！！</em></strong></p>
+<p>Hash的实现：</p>
+<pre><code class="lang-cpp">scanf(&quot;%s&quot;,str+1);
+int str_len = strlen(str+1);
+
+for(int i = 1; i &lt;= str_len; i++)
+{
+    h[i] = h[i - 1] * base + str[i] - &#39;a&#39; + 1;
+} // h 数组 要是 unsigned long long 类型！！！
+</code></pre>
+<p>当求出 <strong>hash 数组</strong> 时，<strong>接下来字符串任意一段字串的hash值都可以求出来，而且复杂的为 <em>O(1)。</em></strong>;<br>如下：<br><img src="https://img-blog.csdnimg.cn/20200202175039500.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200202181226870.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>我们可以定义一个 <strong>p数组</strong> 来存储 <strong>p^( R - L + 1 )</strong></p>
+<p>代码如下：</p>
+<pre><code class="lang-cpp">scanf(&quot;%s&quot;,str+1);
+int m, str_len = strlen(str+1);
+
+p[0] = 1;
+for(int i = 1; i &lt;= str_len; i++)
+{
+    h[i] = h[i - 1] * 131 + str[i] - &#39;a&#39; + 1;
+    p[i] = p[i - 1] * 131;
+}
+</code></pre>
+<h3 id="h3--"><a name="可以解决的题型（我这个菜鸟目前知道的）" class="reference-link"></a><span class="header-link octicon octicon-link"></span>可以解决的题型（我这个菜鸟目前知道的）</h3><p><strong>1. 求主串中任意两段字串是否相等<br>我们已经知道任意一段字串的hash值，那么 我们不就   <em>只需要比较 这两段的hash值是否相等</em>  就好了？<br>复杂的为 O( n )</strong></p>
+<p><strong>2. 判断 str2 是否为 str1 的字串，并计算出现了多少次<br>一开始没有 学习hash 当然首选 KMP，但是因为一些我wa到崩溃！！！(还是太菜了)。<br>有了 hash 并且我们已经知道任意一段字串的hash值，这个问题显然简单多了，复杂的也为 O( n ), n = strlen( str1 )。</strong></p>
+<p>代码如下：</p>
+<pre><code class="lang-cpp">h2 = 0; // h2 表示字符串str2 的hash值 
+for(int i = 1; i &lt;= str2_len; i++)
+    h2 = h2 * 131 + str2[i] - &#39;a&#39; + 1;
+
+h1[0] = 0;
+p[0] = 1;
+for(int i = 1; i &lt;= str1_len; i++)
+{
+    h1[i] = h1[i - 1] * 131 + str1[i] - &#39;a&#39; + 1;
+    p[i] = p[i - 1] * 131;
+}
+sum = 0; // sum 用来计数 
+for(int i = str2_len; i &lt;= str1_len; i++)
+{
+    if(h2 == h1[i] - h1[i - str2_len] * p[str2_len])
+        sum++; 
+}
+</code></pre>

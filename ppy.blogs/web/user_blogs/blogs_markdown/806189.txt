@@ -1,0 +1,97 @@
+详细博客地址[https://blog.csdn.net/pengwill97/article/details/80879387#%E5%AD%97%E7%AC%A6%E4%B8%B2hash%E5%85%A5%E9%97%A8](https://blog.csdn.net/pengwill97/article/details/80879387#%E5%AD%97%E7%AC%A6%E4%B8%B2hash%E5%85%A5%E9%97%A8)
+
+字符串Hash简单来说就是 **把一个字串转换成整数**
+
+***我们可以通过这个整数判断字符串是否相等。
+当然不是简单的将每个字符的ASCLL值相加；因为不同的组合所以字符ASCLL值相加可能相等，使得判断错误。***
+
+# Hash公式
+例如字符串 **str** 由 **a~z** 字符组成。
+则公式如下：
+#### hash[ i ] = hash[ i - 1 ] * p + s[ i ] - ' a ' + 1
+**1. p 为质数，取 131 或者 13331 最佳
+2. s[ i ] - ’ a ’ + 1 相当于 a对应1；b对应2；c对应3 ……
+3. 此处运用了 unsigned long long 的范围自缢出（即自动对 2^64 ?1 取模）使得转换成的整数相等的几率很低**
+
+## 例子
+**str = "abcdef",并且 p 取 131;
+h[ 0 ] = 0 // 默认为0
+h[ 1 ] = h[ 0 ] * p + a - a +1 = 1
+h[ 2 ] = h[ 1 ] * p + b- a +1 = 1 * 131^1 + 2
+h[ 3 ] = …… = 1 * 131^2 + 2 * 131 + 3
+h[ 4 ] = …… = 1 * 131^3 + 2 * 131^2 + 3 * 131 + 4
+h[ 5 ] = …… = 1 * 131^4 + 2 * 131^3 + 3 * 131^2 + 4 * 131 + 5
+h[ 6 ] = …… = 1 * 131^5 + 2 * 131^4 + 3 * 131^3 + 4 * 131^2 + 5 * 131 + 6**
+
+这样是不是有点 **其他进制转换成10进制** 的感觉了？
+
+**其实真的可以理解成 p 进制的数 转换成 十进制的数
+则 abcdef = 123456 (此处为131进制)**
+
+注意输入时可以这样：
+```cpp
+scanf("%s",str+1);
+```
+***方便 hash[ i ] 存储！！！***
+
+Hash的实现：
+
+```cpp
+scanf("%s",str+1);
+int str_len = strlen(str+1);
+		
+for(int i = 1; i <= str_len; i++)
+{
+	h[i] = h[i - 1] * base + str[i] - 'a' + 1;
+} // h 数组 要是 unsigned long long 类型！！！
+```
+当求出 **hash 数组** 时，**接下来字符串任意一段字串的hash值都可以求出来，而且复杂的为 *O(1)。***;
+如下：
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200202175039500.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200202181226870.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70)
+我们可以定义一个 **p数组** 来存储 **p^( R - L + 1 )**
+
+代码如下：
+
+```cpp
+scanf("%s",str+1);
+int m, str_len = strlen(str+1);
+
+p[0] = 1;
+for(int i = 1; i <= str_len; i++)
+{
+	h[i] = h[i - 1] * 131 + str[i] - 'a' + 1;
+	p[i] = p[i - 1] * 131;
+}
+```
+
+### 可以解决的题型（我这个菜鸟目前知道的）
+**1. 求主串中任意两段字串是否相等
+我们已经知道任意一段字串的hash值，那么 我们不就   *只需要比较 这两段的hash值是否相等*  就好了？
+复杂的为 O( n )**
+
+**2. 判断 str2 是否为 str1 的字串，并计算出现了多少次
+一开始没有 学习hash 当然首选 KMP，但是因为一些我wa到崩溃！！！(还是太菜了)。
+有了 hash 并且我们已经知道任意一段字串的hash值，这个问题显然简单多了，复杂的也为 O( n ), n = strlen( str1 )。**
+
+代码如下：
+
+```cpp
+h2 = 0; // h2 表示字符串str2 的hash值 
+for(int i = 1; i <= str2_len; i++)
+	h2 = h2 * 131 + str2[i] - 'a' + 1;
+
+h1[0] = 0;
+p[0] = 1;
+for(int i = 1; i <= str1_len; i++)
+{
+	h1[i] = h1[i - 1] * 131 + str1[i] - 'a' + 1;
+	p[i] = p[i - 1] * 131;
+}
+sum = 0; // sum 用来计数 
+for(int i = str2_len; i <= str1_len; i++)
+{
+	if(h2 == h1[i] - h1[i - str2_len] * p[str2_len])
+		sum++; 
+}
+```

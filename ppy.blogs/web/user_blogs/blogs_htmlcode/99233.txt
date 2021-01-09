@@ -1,0 +1,122 @@
+<h2 id="h2-u5192u6CE1u6392u5E8F"><a name="冒泡排序" class="reference-link"></a><span class="header-link octicon octicon-link"></span>冒泡排序</h2><p>我们先来看看下面这个循环</p>
+<pre><code class="lang-c">for(j = 0; j &lt; n -1; j++)
+{
+    if(a[j] &gt; a[j + 1])
+    {
+        int t = a[j];
+        a[j] = a[j + 1];
+        a[j + 1] = t;
+    }
+}
+</code></pre>
+<p>此时 <strong>n = 5</strong>；<br>如下图解来模拟一下这个过程（<strong>数字表示半径）</strong><br><img src="https://img-blog.csdnimg.cn/20200228144633872.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>① <strong>2</strong> 与 <strong>1</strong> 比较，<strong>2 &gt; 1 所以交换位置</strong><br><img src="https://img-blog.csdnimg.cn/20200228144757953.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>② <strong>2</strong> 与 <strong>5</strong> 比较，<strong>2 &lt; 5 所以不交换位置</strong><br><img src="https://img-blog.csdnimg.cn/20200228144915653.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>③ <strong>5</strong> 与 <strong>4</strong> 比较，<strong>5 &gt; 4 所以交换位置</strong><br><img src="https://img-blog.csdnimg.cn/20200228145326272.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>④<strong>5</strong> 与 <strong>3</strong> 比较，<strong>5 &gt; 3 所以交换位置</strong><br><img src="https://img-blog.csdnimg.cn/20200228145445228.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>通过<strong>四次循环</strong>比较，半径<strong>最大的到达了最后</strong>的位置</p>
+<p>那么此时，<strong>最后一个球我们可以先不管了，因为它的位置再也不会变了</strong><br><img src="https://img-blog.csdnimg.cn/20200228145943808.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>那么此时<strong>分隔线前面球最大半径为4</strong>，我们可以发现只需要<strong>三次循环</strong>就可以使得 <strong>4</strong> 到<strong>最后的位置（分隔线前）</strong>。</p>
+<p>接下来分别是 <strong>两次、一次、零次</strong>对吧？<br>如下代码：</p>
+<pre><code class="lang-c">for(i = 0; i &lt; n - 1; i++)
+{
+    for(j = 0; j &lt; n - i -1; j++)
+    {
+        if(a[j] &gt; a[j + 1])
+        {
+            int t = a[j];
+            a[j] = a[j + 1];
+            a[j + 1] = t;
+        }
+    }
+}
+</code></pre>
+<p>但其实我们发现经过上一步后<strong>顺序已经排好了</strong><br><img src="https://img-blog.csdnimg.cn/20200228150636526.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>后面那几次要进行的循环就没有意义了，所以我们要添加一个 <strong>标记</strong>，<strong>假如一次交换都没有进行则代表顺序已经排好了。</strong></p>
+<p>代码如下：</p>
+<pre><code class="lang-c">void bubble_sort(int a[], int n)
+{
+    int i, j;
+    int flag;
+
+    for(i = 0; i &lt; n - 1; i++)
+    {
+        flag = 0;
+        for(j = 0; j &lt; n - i -1; j++)
+        {
+            if(a[j] &gt; a[j + 1])
+            {
+                flag = 1;
+
+                int t = a[j];
+                a[j] = a[j + 1];
+                a[j + 1] = t;
+            }
+        }
+        if(!flag)
+            break;
+    }
+}
+</code></pre>
+<p>上面就是冒泡排序，我们也可以很清楚的知道：<br><strong>最好情况：时间复杂度为 O(n)，原本就已经有序<br>最坏情况：时间复杂度为O(n * n)，原本就是逆序</strong><br><strong>冒泡排序是稳定的</strong>  <a href="https://baike.baidu.com/item/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%A8%B3%E5%AE%9A%E6%80%A7/9763250?fr=aladdin">稳定性定义</a></p>
+<blockquote>
+<p>冒泡排序是所有排序里最简单的排序，虽然它 O(n <em> n) 的复杂度有些狼狈，但他能用于 </em>单链表的元素排序*（其他排序很难做到） 真的很帅。因为单链表也是从头遍历下来。</p>
+</blockquote>
+<h2 id="h2-u76F4u63A5u63D2u5165u6392u5E8F"><a name="直接插入排序" class="reference-link"></a><span class="header-link octicon octicon-link"></span>直接插入排序</h2><p>斗地主大家应该都玩过吧，无论是现实里玩还是网上玩我们都习惯<strong>排好顺序</strong><br>想要斗地主好技术？<a href="https://www.bilibili.com/video/av56796802?from=search&amp;seid=9946477603225587831">斗地主技术教学</a><br><img src="https://img-blog.csdnimg.cn/20200228153838286.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>① 我们现在手里有一张 <strong>10</strong>，摸进来一张 <strong>J</strong>，我们都知道 <strong>J &gt; 10</strong>,所以 <strong>J</strong> 放在 <strong>10</strong> 后面。<br><img src="https://img-blog.csdnimg.cn/20200228154115934.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>② 接下来摸进一张 <strong>K</strong>，我们都知道 <strong>K &gt; J</strong>,无需跟 <strong>10</strong> 进行比较；所以 <strong>K</strong> 放在 <strong>J</strong> 后面。<br><img src="https://img-blog.csdnimg.cn/20200228154306660.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>③ 然后来了一张 <strong>Q</strong>，我们都知道 <strong>K &gt; Q</strong> ，<strong>Q &gt; J</strong> ；所以 <strong>Q</strong> 要插在 <strong>K 和 J 之间</strong>。那么 <strong>K</strong> 就要 <strong>后移动一个位置</strong> 给 <strong>Q</strong>。<br><img src="https://img-blog.csdnimg.cn/20200228154917565.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>④ 顺子是不是还差一张牌，好家伙来了一张 <strong>9</strong>，<strong>9</strong> 比其他牌<strong>都小</strong> 所以在插入前，<strong>10</strong>，<strong>J</strong>，<strong>Q</strong>，<strong>K</strong> 都要后移。<br><img src="https://img-blog.csdnimg.cn/20200228155506434.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>插入排序：将新元素插入到最后，并与前一个元素进行比较；前一个元素比它大，则交换位置；循环这个过程，直到它比前面元素大或者到达最前面。</strong></p>
+<pre><code class="lang-c">void Insertion_sort(int a[], int n)
+{
+    int i, j;
+    int t;
+
+    for(i = 2; i &lt;= n; i++) // 可以之接从第二个位置开始
+    {
+        t = a[i]; // 相当于摸进新牌
+        for(j = i; j &gt;= 2 &amp;&amp; a[j - 1] &gt; t; j--)
+            a[j] = a[j - 1];
+
+        a[j] = t; 
+    }
+}
+</code></pre>
+<p>上面就是直接插入排序，我们也可以很清楚的知道：<br><strong>最好情况：时间复杂度为 O(n)，原本就已经有序<br>最坏情况：时间复杂度为O(n * n)，原本就是逆序</strong><br><strong>直接插入排序也是稳定的</strong> </p>
+<h2 id="h2-u9009u62E9u6392u5E8F"><a name="选择排序" class="reference-link"></a><span class="header-link octicon octicon-link"></span>选择排序</h2><p><strong>① 找出 整个序列 的最小值，放在第一位。<br>② 找出 第一位后面序列 的最小值，放在第二位。<br>③ 找出 第二位后面序列 的最小值，放在第三位。<br>……</strong><br>如下：<br><img src="https://img-blog.csdnimg.cn/20200228164413635.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>第一步：将最小的放在第一位（可以发现 两个半径相同的球 先后顺序发生了改变）</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20200228164542992.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>第二步：将第二小的放在第二位</strong><br><img src="https://img-blog.csdnimg.cn/2020022816474579.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>第三步：把第三小的放在第三位（当然此时第三小已经在第三位）</strong><br><img src="https://img-blog.csdnimg.cn/20200228164859166.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>这里四个球只需要 三步此种操作，n 个 球 则需要 n - 1步 因为最后剩下来的肯定是最大的。</strong><br>代码：</p>
+<pre><code class="lang-c">void selection(int a[], int n)
+{
+    int i, j;
+    int min = 0;
+
+    for(i = 0; i &lt; n - 1; i++)
+    {
+        min = i;
+        for(j = i + 1; j &lt; n; j++) // 寻找每一段最小值
+        {
+            if(a[min] &gt; a[j])
+            {
+                min = j;
+            }
+        }
+
+        if(min != i)
+        {
+            int t = a[i];
+            a[i] = a[min];
+            a[min] = t;
+        }
+    }
+}
+</code></pre>
+<p>上面就是选择排序<br><strong>通过上图的第一步，我们知道：选择排序为不稳定排序</strong><br><strong>时间复杂度为 O(n * n)</strong></p>
+<h2 id="h2-u6876u6392u5E8F"><a name="桶排序" class="reference-link"></a><span class="header-link octicon octicon-link"></span>桶排序</h2><p>顾名思义拿 <strong>“桶”</strong> 装下数据。</p>
+<p>例如：一个一千人的学校，所有科目总成绩750，现在要将这一千份成绩排序。</p>
+<p>① 好像用上面三种方法还是可以接受的，最多就 <strong>O(n * n)</strong> 的时间复杂度。<br>② 但是这个 <strong>桶排序</strong> 呀，仅仅只要 <strong>O(n)</strong> 的时间复杂度哦！！！</p>
+<p><strong>一千个数据有点不好列举，我举个简单点的数据。</strong><br><img src="https://img-blog.csdnimg.cn/20200228212851344.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200228213441861.png" alt="在这里插入图片描述"><br><strong>为什么要开这个数组？而且容量还是25？</strong><br>用下面这段代码解释：</p>
+<pre><code class="lang-c">void bucket_sort(int n, int b[]) // n 代表数据数量 
+{
+    int i;
+    int x;
+
+    for(i = 1; i &lt;= n; i++)
+    {
+        scanf(&quot;%d&quot;,&amp;x);
+        b[x]++;
+    }
+}
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/20200228215848730.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>所以在输入完之后，① 我们可以直接遍历数组；② 下标对应值为多少，我们就输出下标多少次 ③ 输出之后的序列绝对是有序的</strong></p>
+<ol>
+<li><strong>桶排优势：① 简单易写 ② 时间复杂度为O(n)</strong></li><li><strong>桶排劣势：① 在不知道数据范围时，不能确定数组大小，很危险 ② 数据数量很少，数据跨度极大（如：1 ~ 10000 的 10 个数排序）对空间浪费很大 ③ 数据中存在负数，处理不方便</strong></li></ol>
+<p><strong>① 数据跨度较小时，我们可以选择桶排序<br>② 桶排序可以用于数据去重，下标对应值不为0的，输出一次即可<br>③ 桶排序可以用于统计每个数据出现次数</strong></p>

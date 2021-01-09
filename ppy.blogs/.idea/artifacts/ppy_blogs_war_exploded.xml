@@ -1,0 +1,19 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ppy.blogs:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/ppy_blogs_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ppy.blogs" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="libs" />
+          <element id="library" level="project" name="lib" />
+          <element id="library" level="project" name="libs1" />
+          <element id="library" level="project" name="jstl" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="ppy.blogs/web/Web" />
+    </root>
+  </artifact>
+</component>

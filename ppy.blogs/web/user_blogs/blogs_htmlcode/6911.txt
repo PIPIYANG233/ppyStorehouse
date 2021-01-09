@@ -1,0 +1,90 @@
+<p><strong>希尔排序可以说是直接插入排序的进阶版</strong></p>
+<blockquote>
+<p><strong>基本思想</strong><br>先取一个小于n的整数d1作为第一个增量，把文件的全部记录分组。所有距离为d1的倍数的记录放在同一个组中。先在各组内进行直接插入排序；然后，取第二个增量d2&lt;d1重复上述的分组和排序，直至所取的增量 =1( &lt; …&lt;d2&lt;d1)，即所有记录放在同一组中进行直接插入排序为止。</p>
+<p><strong>该方法实质上是一种分组插入方法</strong><br>比较相隔较远距离（称为增量）的数，使得数移动时能跨过多个元素，则进行一次比较就可能消除多个元素交换。D.L.shell于1959年在以他名字命名的排序算法中实现了这一思想。算法先将要排序的一组数按某个增量d分成若干组，每组中记录的下标相差d.对每组中全部元素进行排序，然后再用一个较小的增量对它进行，在每组中再进行排序。当增量减到1时，整个要排序的数被分成一组，排序完成。<br><strong>一般的初次取序列的 一半为增量，以后每次减半，直到增量为1。</strong></p>
+</blockquote>
+<p>一个具体例子：<br><img src="https://img-blog.csdnimg.cn/202002281952448.png" alt="在这里插入图片描述"><br><strong>第一趟：</strong><br><img src="https://img-blog.csdnimg.cn/20200228202702378.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>第二趟：</strong><br><img src="https://img-blog.csdnimg.cn/20200228203540722.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>第三趟：</strong><br><img src="https://img-blog.csdnimg.cn/20200228203921370.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>此躺不会影响上一趟已排好序列</strong></p>
+<p>代码：</p>
+<pre><code class="lang-c">void shell_sort(int a[], int n)
+{
+    int d, j, k;
+    int t;
+
+    for(d = n / 2; d &gt; 0; d /= 2) // 其实就是将 0 的地方全部改成 d
+    {
+        for(j = d; j &lt; n; j++)
+        {
+            t = a[j];
+            for(k = j - 1; k &gt;= d &amp;&amp; a[k - d] &gt; t; k--)
+                a[k] = a[k - d];
+
+            a[k] = t;
+        } 
+    }
+}
+</code></pre>
+<p><strong>① 时间复杂度：O(n^（1.3—2）)</strong><br><strong>② 希尔排序为不稳定排序</strong></p>
+<h2 id="h2-u5FEBu901Fu6392u5E8F"><a name="快速排序" class="reference-link"></a><span class="header-link octicon octicon-link"></span>快速排序</h2><blockquote>
+<p><strong>基本思想</strong><br>通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20200229090842189.gif" alt="在这里插入图片描述"><br><strong>①</strong> 选择一个<strong>基准点</strong>，一般选择区间<strong>最左端元素</strong>（上图选择的是区间最右端）</p>
+<p><strong>②</strong> 设置 <strong>右、左</strong> 指针，分别从 <strong>右端、左端</strong> 开始 <strong>。</strong> 假如 <strong>右指针</strong> 指向的元素 <strong>大于等于</strong> 基准             点，则 <strong>右指针 向左移动</strong>，否则停止 <strong>。</strong> 接下来 假如 <strong>左指针</strong> 指向的元素 <strong>小于等于</strong> 基准点，则 <strong>左指针 向右移动</strong>，否则停止 <strong>。</strong>（为了确保 <strong>左边部分总是小于等于基准点，右部分总是大于等于基准点</strong>）</p>
+<p><strong>③</strong> 右指针、左指针 指向的<strong>元素相互交换</strong>，继续执行 <strong>第②步。</strong> 直到右指针 与 左指针 <strong>重合</strong></p>
+<p><strong>④</strong> 将此时 <strong>两个指针所共同指向的元素</strong> 与 <strong>基准点 相互交换</strong></p>
+<p><strong>⑤</strong> <strong>接下来是</strong>递归<strong>操作：以 </strong>两个指针共同指向的位置<strong> 作为 </strong>分界线；<strong> </strong>前后两个部分<strong> 都进行</strong>与<strong>前四步相同的操作</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20200229095249455.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200229095725239.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200229095831614.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200229095935434.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020022910003076.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200229100234370.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200229100641439.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200229100930454.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200229101204773.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200229101540665.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200229101928982.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>代码：</p>
+<pre><code class="lang-c">void quick_sort(int a[], int l, int r)
+{
+    if(l &gt;= r) // 递归结束条件 
+        return;
+
+    int t = a[l];
+    int i = l, j = r;
+
+    while(i &lt; j)
+    {
+        while(i &lt; j &amp;&amp; a[j] &gt;= t) // 右指针的移动 
+            j--;
+
+        while(i &lt; j &amp;&amp; a[i] &lt;= t) // 左指针的移动 
+            i++
+
+        if(i &lt; j)
+        {
+            int h = a[i];
+            a[i] = a[j];
+            a[j] = h;
+        }
+    }
+    a[l] = a[i];
+    a[i] = t;
+                        // 对分成的两部分继续进行排序    
+    quick_sort(a, l, i);
+    quick_sort(a, i + 1, r);
+}
+</code></pre>
+<p><strong>快速排序并不是所有情况都快：</strong><br><strong>① 最坏情况：序列接近有序，时间复杂度为 O(n * n)</strong><br><strong>② 最好情况：序列接近无序，时间复杂度为O(n logn)</strong><br><strong>③ 快速排序为不稳定排序</strong></p>
+<h2 id="h2-u8868u6392u5E8F"><a name="表排序" class="reference-link"></a><span class="header-link octicon octicon-link"></span>表排序</h2><blockquote>
+<p><strong>我们平常用的排序都是直接用于值交换（数字、字符等），但是在实际生活我们可不是仅仅只交换数字或者字符，一般都是一大部分内容的移动；直接进行值交换的话，时间的花费是相当恐怖的。</strong></p>
+</blockquote>
+<p><strong>表排序：将 “指针” 进行排序（“指针” 并不是 C里的指针）。</strong></p>
+<p>我们继续用之前 直接插入排序的扑克牌举例：<br><img src="https://img-blog.csdnimg.cn/20200229110912731.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200229111725305.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020022911192050.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200229113737185.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200229114319811.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>代码：</p>
+<pre><code class="lang-c">void table_sort(int card[], int table, int n) // card 下标从0开始 0 
+{
+    int i, j;
+    int t;
+
+    for(i = 0; i &lt; n; i++)
+        table[i] = i;
+
+    for(i = 1; i &lt; n; i++)
+    {
+        t = table[i];
+        for(j = i; j &gt; 0 &amp;&amp; card[table[j - 1]] &gt; card[t]; j--)
+            table[j] = table[j - 1];
+
+        table[j] = t;
+    }
+}
+</code></pre>
+<p><strong>此处只是拿直接插入排序做例子</strong><br><strong>① 用到其他排序里也是同样的，但是要记得是换下标，时间复杂度与这些排序复杂度匹配</strong><br><strong>② 写的时候要细心，很容易出错</strong></p>

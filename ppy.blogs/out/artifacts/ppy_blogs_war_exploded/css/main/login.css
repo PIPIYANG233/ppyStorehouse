@@ -1,0 +1,90 @@
+body{
+    background-size: 100%;
+    background-attachment:fixed;
+}
+
+#search_input{
+    background: #f0f0f5;
+    width: 100%;
+}
+
+#search{
+    background-color: #f0f0f5;
+}
+
+#right_head_img{
+    margin-top: 2px;
+    margin-right: 5px;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+}
+
+.main{
+    width: 50%;
+    height: 45%;
+    border: 8px solid #EEEEEE;
+    background: white;
+    margin: auto;
+    margin-top: 100px;
+}
+
+.tit{
+    margin-left: 50px;
+    margin-top: 5px;
+}
+
+.center{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.form-group{
+    width: 50%;
+    margin: 0px auto;
+    display: table;
+}
+
+label{
+    float: left;
+    width: 15%;
+    font-size: large;
+    margin-top: 5px;
+}
+
+#id{
+    width: 70%;
+    float: left;
+    margin-left: 20px;
+}
+
+#pwd{
+    width: 70%;
+    float: left;
+    margin-left: 20px;
+}
+
+#验证码{
+    width: 29%;
+    height: 50px;
+    float: left;
+    margin-left: 20px;
+}
+
+#pic{
+    cursor: pointer;
+}
+
+span{
+    float: left;
+}
+
+#login_row{
+    margin: auto;
+    width: 17%;
+}
+
+#login_btn{
+    margin: auto;
+    width: 115%;
+}

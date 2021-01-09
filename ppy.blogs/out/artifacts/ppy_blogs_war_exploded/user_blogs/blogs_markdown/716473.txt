@@ -1,0 +1,56 @@
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20201120202945293.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70#pic_center)
+
+```cpp
+#include<cstdio>
+#include<iostream>
+#include<algorithm>
+
+using namespace std;
+
+int f[30010];
+
+
+int findRoot(int root)
+{
+	if(root == f[root])
+		return root;
+	return f[root] = findRoot(f[root]);
+}
+
+int main()
+{
+	int n, m;
+	cin>>n>>m;
+	int cnt[30010] = {0};	
+	for(int i = 1; i <= n; i++)
+	{
+		f[i] = i;
+		cnt[i] = 1;
+	}
+	while(m--)
+	{
+		int j, k;
+		scanf("%d%d", &j, &k);
+		for(int i = 1; i < j; i++) // 假如俱乐部人数超过1 
+		{
+			int l; // 输入后者 
+			scanf("%d", &l);
+			int x = findRoot(k);
+			int y = findRoot(l);
+			if(x != y)
+			{
+				f[x] = y; // 后者将前者融入自己圈子 
+				cnt[y] += cnt[x]; // 后者将前者圈子的人也融入自己圈子 
+			}	
+			k = l; // 后者变成前者 
+		}
+	}
+	
+	int maxx = 0;
+	for(int i = 1; i <= n; i++)
+		maxx = max(maxx, cnt[i]);
+			
+	cout<<maxx;	
+	return 0;
+}
+```

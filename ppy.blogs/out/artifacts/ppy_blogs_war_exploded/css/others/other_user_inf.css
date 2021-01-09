@@ -1,0 +1,103 @@
+#search_input{
+    background: #f0f0f5;
+    width: 100%;
+}
+
+#search{
+    background-color: #f0f0f5;
+}
+
+#right_head_img{
+    margin-top: 2px;
+    margin-right: 5px;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+}
+
+.left{
+    display: none;
+    width: 10%;
+    height: 35%;
+    border: 3px solid gainsboro;
+    background: white;
+    float: left;
+    margin-left: 10px;
+    margin-top: 10%;
+}
+
+#author_inf{
+    background: gold;
+    border-radius: 30px;
+    text-align: center;
+    border: white;
+    width: 90%;
+    margin: auto;
+}
+
+#author_blogs{
+    text-align: center;
+    border: white;
+    width: 90%;
+    margin: auto;
+}
+
+.manager_div{
+    width: 100%;
+}
+
+.main_center_up {
+    height: 30%;
+}
+
+.main_center_down {
+    height: 70%;
+}
+
+p {
+    font-size: large;
+    width: 60%;
+}
+
+#head_img {
+    width: 120px;
+    height: 120px;
+    margin-left: 42%;
+    margin-top: 10px;
+}
+
+.main_center_down_left {
+    float: left;
+    margin-left: 10%;
+    width: 40%;
+}
+
+.main_center_down_right {
+    float: right;
+    margin-right: 0px;
+    width: 40%;
+    /*background: deeppink;*/
+}
+
+#num{
+    font-size: large;
+}
+
+.num {
+    color: black;
+    font-size: large;
+}
+
+.data_img{
+    width: 40px;
+    height: 40px;
+}
+
+.main_center_down_right_down{
+    width: 70%;
+    height: 25%;
+    float: left;
+    margin-left: 0px;
+    font-size: medium;
+    /*background: green;*/
+}

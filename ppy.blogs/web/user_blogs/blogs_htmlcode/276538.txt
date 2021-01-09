@@ -1,0 +1,56 @@
+<p><img src="https://img-blog.csdnimg.cn/20201120203932312.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODM5NzA4,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<pre><code class="lang-cpp">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+
+using namespace std;
+
+int a[1010];
+int low, high, mid, index;
+int sum = 0;
+
+bool search(int x)
+{
+    if(low &gt; high) // low 大于high 则结束查找 
+    {
+        index = -1; // 此时下标返回-1 
+        return true;
+    }
+
+    sum++; // 每查找一次,次数+1 
+
+    if(a[mid] == x)
+    {
+        index = mid;
+        return true;
+    }
+    return false;
+}
+
+int main()
+{
+    int n;
+    cin&gt;&gt;n;
+    for(int i = 0; i &lt; n; i++)
+    {
+        cin&gt;&gt;a[i];
+    }
+    sort(a, a + n);
+    int x;
+    cin&gt;&gt;x;
+
+    low = 0;
+    high = n - 1;
+    mid = (low + high) / 2;
+    while(!search(x)) // 没有找到则继续找 
+    {
+        if(a[mid] &lt; x)
+            low = mid + 1;
+        else if(a[mid] &gt; x)
+            high = mid - 1;
+        mid = (low + high) / 2;
+    }
+    cout&lt;&lt;index&lt;&lt;endl;
+    cout&lt;&lt;sum;
+}
+</code></pre>
+<p><strong>low =  mid  + 1</strong><br><strong>high = mid - 1</strong><br><em>为了防止出现 l<br>ow 与 high 相邻<br>此时 mid 一直等于 low<br>当然也不会影响 查找值在边界 的结果</em></p>

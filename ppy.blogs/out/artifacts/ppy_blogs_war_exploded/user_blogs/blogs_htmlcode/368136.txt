@@ -1,0 +1,91 @@
+<h4 id="h4-u6709u60C5u4EBAu7EC8u6210u5144u59B9"><a name="有情人终成兄妹" class="reference-link"></a><span class="header-link octicon octicon-link"></span>有情人终成兄妹</h4><p>相信这样的狗血剧情韩剧里有很多。<br><img src="https://img-blog.csdnimg.cn/20200123195930450.png" alt="在这里插入图片描述"><br>这种情况往往只会出现在特别特别大的家庭里,而且家庭成员分布各地。但人一般都不会看族谱，所以在根本不知道对方是自己妹妹的情况下与之相爱。<br><img src="https://img-blog.csdnimg.cn/20200123201205638.jpg" alt="在这里插入图片描述"><br><strong>将其变成</strong><br><img src="https://img-blog.csdnimg.cn/20200123201929612.jpg" alt="在这里插入图片描述"><br>那我们马上就可以知道我们祖先是谁，碰到妹子可以直接问她祖先是谁就可以防止上面的尴尬了。<br><img src="https://img-blog.csdnimg.cn/20200123202106621.png" alt="在这里插入图片描述"></p>
+<p>不好意思以上纯属本人玩笑。<br>好的正经点，古时江湖两人决斗后发现是同门人岂不是很尴尬，但是一级一级上去问又太麻烦了，假如每个成员的直接上级都变成堂主，在决斗之前先问问对方自己的堂主是谁，不就可以避免自相残杀让别的门派看笑话了吗？<strong>正好并查集可以实现每个人上一级直接就是堂主。</strong></p>
+<p>首先呢要实现每个成员的直接上级就是堂主，哪就先得知道堂主是谁（也就相当于一棵树的根）；<br>接下来我用代码展示<br><strong>1.找到堂主<br>2.将 <em>从此成员一直到堂主</em> 这条路径上每个成员的直接上级变成堂主</strong>。</p>
+<p>代码如下：</p>
+<pre><code class="lang-c">int find_boss(int boss)
+{
+// 此处为 1 号操作
+    int dd = boss, t;
+    while(root != member[boss])// member数组元素代表每个成员直接上级，例如member[i]代表i的直接上级
+        boss = member[boss];// 当某个成员直接上级为自己时，说明他就是堂主！！！
+// 此处为 2 号操作        
+    while(dd != boss)// 此时 boss已经是真正的boss（堂主）了！！！
+    {
+        t = member[dd];
+        member[dd] = boss;
+        dd = t;
+    }
+    return boss;
+}
+</code></pre>
+<p><strong>但最开始是没有门派的，也可以说每个人就是一派；所以 member 数组初始化如下：</strong></p>
+<pre><code class="lang-c">for(i = 1; i &lt;= n; i++)
+            member[i] = i；
+</code></pre>
+<p><strong>1.假如后来堂主都想着合并帮派，每个门派都会安排人（人数不定）出去<br>2.遇到人就先问他属于哪个门派<br>3.假如不属于同一门派，则双方上报堂主<br>4.双方门派堂主通过决斗，赢家合并对方门派，成为新门派堂主<br>5.求最终门派数量</strong></p>
+<p>代码如下：</p>
+<pre><code class="lang-c">int person1, person2;
+            scanf(&quot;%d%d&quot;,&amp;person1,&amp;person2);// 此为相遇的两人
+
+            person1 = find_boss(person1);
+            person2 = find_boss(person2);
+            if(person1 != person2)// 堂主不为统一位，则堂主双方堂主决斗
+                member[person1] = person2;// 我们这里固定赢家为 2 方
+                // 因为最终都是变成一个门派
+</code></pre>
+<p><strong><em>最终统计剩余门派</em>：<br>1.我们先要把每个江湖人物的堂主找出<br>2.再判断堂主是否为自己，一个堂主即为一个门派</strong></p>
+<p>代码如下：</p>
+<pre><code class="lang-c">int ans = 0；
+for(i = 1; i &lt;= n; i++)
+            member[i] = find_boss(i);
+            // 找出每个江湖人物的堂主
+        for(i = 1; i &lt;= n; i++)
+            if(i==member[i]) ans++;
+</code></pre>
+<p>最终代码如下：</p>
+<pre><code class="lang-c">#include&lt;stdio.h&gt;
+int member[10000100]={0};
+int find_boss(int boss)
+{
+    int dd = boss, t;
+    while(boss != member[boss])
+        boss = friend[boss];
+    while(dd != boss)
+    {
+        t = member[dd];
+        member[dd] = boss;
+        dd = t;
+    }
+    return boss;
+}
+int main()
+{
+    int n,m;
+    while(scanf(&quot;%d%d&quot;,&amp;n,&amp;m)!=EOF)
+    {
+        int i;
+        for(i = 1; i &lt;= n; i++)
+            member[i] = i;
+
+        while(m--)
+        {
+            int person1, person2;
+            scanf(&quot;%d%d&quot;,&amp;person1,&amp;person2);
+
+            person1 = find_boss(person1);
+            person2 = find_boss(person2);
+            if(person1 != person2)
+                member[person1] = person2;
+        }
+        for(i = 1; i &lt;= n; i++)
+            member[i] = find_boss(i);
+
+        for(i = 1; i &lt;= n; i++)
+            if(i==member[i])ans++;
+
+        printf(&quot;%d\n&quot;,ans);
+    }
+    return 0;
+}
+</code></pre>
+<p>谢谢！！！</p>

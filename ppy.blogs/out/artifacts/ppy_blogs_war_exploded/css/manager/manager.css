@@ -1,0 +1,264 @@
+body{
+    background-size: 100%;
+    background-attachment:fixed;
+}
+
+#search_input{
+    background: #f0f0f5;
+    width: 100%;
+}
+
+#search{
+    background-color: #f0f0f5;
+}
+
+#right_head_img{
+    margin-top: 2px;
+    margin-right: 5px;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+}
+
+.manager{
+    border-radius: 5px;
+    width: 65%;
+    height: 90%;
+    float: left;
+    margin-left: 17%;
+    background: white;
+}
+
+.manager_sort{
+    height: 5%;
+    width: 80%;
+    margin: auto;
+    /*background: whitesmoke;*/
+}
+
+.sorts{
+    border: 1px solid whitesmoke;
+    font-size: medium;
+    float: left;
+    margin-left: 5.5%;
+    margin-top: 1%;
+    text-align: center;
+    width: 11.5%;
+    height: 65%;
+    cursor: pointer;
+    color: lightgray;
+    /*background: blue;*/
+}
+
+.changeBackground{
+    background: #FFEFEF;
+    color: red;
+}
+
+.managerBlogs{
+    display: none;
+    height: 86%;
+    width: 100%;
+    margin: auto;
+    /*background: deeppink;*/
+}
+
+.managerBlog{
+    width: 90%;
+    height: 10.5%;
+    margin: auto;
+    margin-top: 1%;
+    background: whitesmoke;
+}
+
+.managerBlog_title{
+    width: 100%;
+    height: 40%;
+    float: left;
+    margin-left: 0px;
+    /*margin-top: 20px;*/
+    font-size: large;
+    cursor: pointer;
+    /*background: pink;*/
+}
+
+.managerBlog_data{
+    width: 15%;
+    height: 35%;
+    float: left;
+    margin-top: 10px;
+    /*background: purple;*/
+}
+
+.managerBlog_type{
+    width: 50%;
+    height: 100%;
+    float: left;
+    color: lightgray;
+    /*background: #00d95a;*/
+}
+
+.managerBlog_accept_original{
+    -webkit-text-fill-color:#EFADA8
+}
+
+.managerBlog_accept_reprint{
+    -webkit-text-fill-color: lightgreen;
+}
+
+.managerBlog_notAccept{
+    -webkit-text-fill-color: red;
+}
+
+.blog_wait{
+}
+
+.managerBlog_option{
+    width: 60%;
+    height: 40%;
+    float: right;
+    margin-right: 0px;
+    margin-top: 10px;
+    /*background: pink;*/
+}
+
+.passed{
+    float: right;
+    margin-right: 10%;
+}
+
+#passed_btn{
+    height: 100%;
+    font-size: small;
+}
+
+.notPassed{
+    float: right;
+    margin-right: 10%;
+}
+
+#notPassed_btn{
+    height: 100%;
+    font-size: small;
+}
+
+.recommend{
+    float: right;
+    margin-right: 10%;
+}
+
+#recommend_btn{
+    height: 100%;
+    font-size: small;
+}
+
+.notRecommend{
+    float: right;
+    margin-right: 10%;
+}
+
+#notRecommend_btn{
+    height: 100%;
+    font-size: small;
+}
+
+.managerUsers{
+    display: none;
+    height: 86%;
+    width: 100%;
+    margin: auto;
+    /*background: deeppink;*/
+}
+
+.managerUser{
+    width: 90%;
+    height: 10.5%;
+    margin: auto;
+    margin-top: 1%;
+    background: whitesmoke;
+}
+
+.managerUser_head{
+    width: 10%;
+    height: 100%;
+    /*background: #FFAA3E;*/
+    float: left;
+    margin-left: 0px;
+}
+
+#managerUser_head_img{
+    cursor: pointer;
+    width: 65px;
+    height: 65px;
+    float: left;
+    margin-left: 3px;
+    margin-top: 3px;
+}
+
+.managerUser_data{
+    float: left;
+    width: 85%;
+    height: 100%;
+    margin-left: 0px;
+    /*background: pink;*/
+}
+
+.managerUser_name_div{
+    float: left;
+    margin-left: 0px;
+    font-size: x-large;
+    text-align: revert;
+    color: lightgray;
+    width: 50%;
+    height: 100%;
+    /*background: #1b6d85;*/
+}
+
+.managerUser_name{
+    float: left;
+    margin-left: 0px;
+    margin-top: 4%;
+    height: 50%;
+    width: 100%;
+    /*background: blue;*/
+}
+
+.managerUser_follow{
+    float: right;
+    margin-right: 0px;
+    width: 50%;
+    height: 100%;
+    /*background: #FFAA3E;*/
+}
+
+#managerUser_delete_button{
+    float: right;
+    margin-top: 4%;
+}
+
+#managerUser_set_button{
+    float: right;
+    margin-top: 4%;
+}
+
+.managerLabels{
+    display: none;
+}
+
+.managerLabel_input{
+    width: 80%;
+    float: left;
+    margin-left: 9%;
+    margin-top: 1.5%;
+}
+
+.managerLabel_btn{
+    float: left;
+}
+
+.page{
+    height: 10%;
+    width: 80%;
+    margin: auto;
+    /*background: deeppink;*/
+}

@@ -1,0 +1,130 @@
+
+#user_inf {
+    border-radius: 30px;
+    background: gold;
+}
+
+.main_center_up {
+    height: 30%;
+    /*background: deeppink;*/
+}
+
+.main_center_down {
+    height: 70%;
+}
+
+p {
+    font-size: large;
+    width: 60%;
+}
+
+#head_img {
+    width: 120px;
+    height: 120px;
+    margin-left: 30%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+#img_file{
+    display: none;
+}
+
+.change_inf_modal{
+    width: 50%;
+    margin: auto;
+    /*background: green;*/
+}
+
+.change_inf_input{
+    width: 100%;
+}
+
+.change_inf_textarea{
+    width: 100%;
+    height: 100px;
+    resize: none;
+    font-size: large;
+}
+
+.main_center_down_left {
+    float: left;
+    margin-left: 10%;
+    width: 40%;
+    /*background: pink;*/
+}
+
+.main_center_down_right {
+    float: right;
+    margin-right: 0px;
+    width: 40%;
+    /*background: deeppink;*/
+}
+
+.num {
+    font-size: large;
+}
+
+.data_img{
+    width: 40px;
+    height: 40px;
+}
+
+.main_center_down_right_down{
+    width: 70%;
+    height: 25%;
+    float: left;
+    margin-left: 0px;
+    font-size: medium;
+    /*background: green;*/
+}
+
+.main_right {
+    display: none;
+    border-radius: 30px;
+    margin-top: 10%;
+    margin-left: 5%;
+    width: 20%;
+    height: 35%;
+    background: white;
+    float: left;
+}
+
+#h{
+    margin-left: 29%;
+}
+
+#head_label{
+    width: 120px;
+    height: 120px;
+    margin-left: 29%;
+    margin-top: 10px;
+}
+
+#head_img_change{
+    width: 120px;
+    height: 120px;
+    cursor: pointer;
+}
+
+.main_right_button{
+    width: 60%;
+    height: 20%;
+    margin: auto;
+}
+
+#yes{
+    border-radius: 30px;
+    margin-top: 10%;
+    float: left;
+    width: 40%;
+    height: 50%;
+}
+
+#no{
+    border-radius: 30px;
+    margin-top: 10%;
+    float: right;
+    width: 40%;
+    height: 50%;
+}
